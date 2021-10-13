@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+>
+
+    <mapped-superclass
+            name="Madcoders\SyliusTaxonGalleryPlugin\Entity\TaxonGalleryItem"
+            table="madcoders_taxon_gallery_item"
+    >
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="code" column="code" type="string" length="100" unique="true" />
+        <field name="enabled" column="enabled" type="boolean" />
+
+        <field name="position" column="position" type="integer">
+            <gedmo:sortable-position />
+        </field>
+
+        <many-to-one field="menuTaxon" target-entity="Sylius\Component\Core\Model\TaxonInterface">
+            <join-column name="menu_taxon_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
+        </many-to-one>
+
+        <field name="description" column="description" nullable="true" type="text" />
+        <field name="imageSource" column="image_source" type="string"/>
+
+        <field name="imagePath" column="icon_path" nullable="true" type="string" />
+
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+    </mapped-superclass>
+</doctrine-mapping>

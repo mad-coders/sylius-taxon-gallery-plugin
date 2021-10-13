@@ -1,0 +1,29 @@
+# Sylius TaxonGallery Plugin
+#
+# @copyright MADCODERS Team (www.madcoders.co)
+# @licence For the full copyright and license information, please view the LICENSE
+#
+# Architects of this package:
+# @author Leonid Moshko <l.moshko@madcoders.pl>
+# @author Piotr Lewandowski <p.lewandowski@madcoders.pl>
+
+madcoders_taxon_gallery_admin_taxon_gallery_item:
+    resource: |
+        alias: madcoders_taxon_gallery.taxon_gallery_item
+        section: admin
+        templates: "@SyliusAdmin\\Crud"
+        redirect: update
+        grid: sylius_taxon_gallery_plugin_admin_taxon_gallery
+        vars:
+            all:
+                subheader: madcoders_taxon_gallery.admin.taxon_gallery_item_show_or_edit
+                templates:
+                  form: "@MadcodersSyliusTaxonGalleryPlugin/Admin/TaxonGallery/Item/_form.html.twig"
+            index:
+                icon: 'file image outline'
+    type: sylius.resource
+
+madcoders_taxon_gallery_admin_taxon_gallery_taxon_image:
+    path: /taxon-gallery-items/get-taxon-image/{taxonCode}
+    methods: [ 'GET' ]
+    controller: Madcoders\SyliusTaxonGalleryPlugin\Controller\Taxon\GetTaxonImageAction

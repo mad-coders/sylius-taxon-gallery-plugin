@@ -1,0 +1,4 @@
+suites:
+    main:
+        namespace: Madcoders\SyliusTaxonGalleryPlugin
+        psr4_prefix: Madcoders\SyliusTaxonGalleryPlugin

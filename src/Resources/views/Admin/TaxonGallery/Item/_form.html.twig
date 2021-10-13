@@ -1,0 +1,261 @@
+{#
+# This file is part of package:
+# Sylius Taxon Gallery Plugin
+#
+# @copyright MADCODERS Team (www.madcoders.co)
+# @licence For the full copyright and license information, please view the LICENSE
+#
+# Architects of this package:
+# @author Leonid Moshko <l.moshko@madcoders.pl>
+# @author Piotr Lewandowski <p.lewandowski@madcoders.pl>
+#}
+
+{% set namespace = 'Madcoders\\SyliusTaxonGalleryPlugin\\Entity' %}
+
+<div class="ui stackable grid">
+    {{ form_errors(form) }}
+    <div class="eight wide column">
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.configuration'|trans }}</h4>
+            <div class="field">
+                {{ form_row(form.code) }}
+            </div>
+            <div class="field">
+                {{ form_row(form.position) }}
+            </div>
+            <div class="field">
+                {{ form_row(form.enabled) }}
+            </div>
+            <div class="ui hidden divider"></div>
+            <div class="field">
+                {{ form_row(form.menuTaxon) }}
+            </div>
+            <div class="field">
+                {{ form_row(form.imageSource) }}
+            </div>
+        </div>
+    </div>
+    <div class="eight wide column" id="madcoders_taxon_gallery_taxon_image_block">
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'madcoders_taxon_gallery.admin.taxon_gallery_item.form.image_block_from_taxon'|trans }}</h4>
+            <div class="ui content">
+                <img id="madcoders_taxon_gallery_taxon_image_tag" src="" />
+                <div id="madcoders_taxon_gallery_taxon_no_image_notice" class="ui secondary segment">
+                    {{ 'madcoders_taxon_gallery.admin.taxon_gallery_item.form.no_taxon_image'|trans }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="eight wide column" id="madcoders_taxon_gallery_uploaded_image_block">
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'madcoders_taxon_gallery.admin.taxon_gallery_item.form.image_block_upload'|trans }}</h4>
+            <div class="field">
+                <div class="ui content">
+
+                    {% if form.vars.value.imagePath|default(null) is null %}
+                        <label for="{{ form.image.vars.id }}" class="ui icon labeled button"><i class="cloud upload icon"></i>
+                            {{ 'sylius.ui.choose_file'|trans }}
+                        </label>
+                        <br/>
+                    {% else %}
+                        <a href="{{ form.vars.value.imagePath }}" target="_blank" class="ui icon labeled primary button">
+                            <i class="cloud download icon"></i> {{ 'madcoders_taxon_gallery.admin.taxon_gallery_item.form.download'|trans }}</a>
+                        <label for="{{ form.image.vars.id }}" class="ui icon labeled button">
+                            <i class="cloud upload icon"></i> {{ 'sylius.ui.change_file'|trans }}
+                        </label>
+                        <br/>
+                        <h4 class="ui dividing header">
+                            {{ 'madcoders_taxon_gallery.admin.taxon_gallery_item.form.image_preview'|trans }}
+                        </h4>
+                        <img class="ui small bordered image" src="{{ (form.vars.value.imagePath)|imagine_filter('taxon_gallery_item_image') }}"
+                             alt="main_image_preview" />
+                        <br/>
+                    {% endif %}
+                    <br/>
+                    <div id="info_area_for_{{ form.image.vars.id }}">
+                    </div>
+                    <div class="security-class">
+                        <div class="ui hidden element">
+                            {{ form_widget(form.image) }}
+                        </div>
+                        <div class="ui element">
+                            {{- form_errors(form.image) -}}
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+  (function() {
+
+    const selectElement = document.querySelector('#{{ form.image.vars.id |json_encode() |trim('"') }}');
+    const infoArea = document.getElementById('info_area_for_{{ form.image.vars.id |json_encode() |trim('"') }}');
+    const text = '{{ 'madcoders_taxon_gallery.admin.taxon_gallery_item.info_area_text'| trans }}';
+    selectElement.addEventListener('change', (event) => {
+      var input = event.srcElement;
+      var fileName = input.files[0].name;
+      infoArea.textContent = text + ': ' + fileName;
+    });
+
+  } )();
+</script>
+
+<script>
+    {# manage display of image source #}
+    (function() {
+      const show = function(el) {
+        el.style.display = 'block';
+      };
+
+      const hide = function(el) {
+        el.style.display = 'none';
+      };
+
+      const onChange = function() {
+        if (selectElement.value === '{{ constant(namespace ~ '\\TaxonGalleryItemInterface::IMAGE_SOURCE_TAXON') }}') {
+          show(imageBlockUploaded);
+          hide(imageBlockTaxon);
+        } else {
+          hide(imageBlockUploaded);
+          show(imageBlockTaxon);
+        }
+      };
+
+      const selectElement = document.getElementById('{{ form.imageSource.vars.id }}');
+      const imageBlockUploaded = document.getElementById('madcoders_taxon_gallery_uploaded_image_block');
+      const imageBlockTaxon = document.getElementById('madcoders_taxon_gallery_taxon_image_block');
+      if (!selectElement) {
+        return;
+      }
+
+      selectElement.addEventListener('change', onChange);
+      onChange();
+    })();
+</script>
+
+<script>
+    {# manage display of taxon image #}
+    (function () {
+      const imageServiceUrlPattern = '{{ path('madcoders_taxon_gallery_admin_taxon_gallery_taxon_image', { 'taxonCode': '__taxonCode__' }) }}';
+      const selectElement = document.getElementById('{{ form.menuTaxon.vars.id }}');
+      const image = document.getElementById('madcoders_taxon_gallery_taxon_image_tag');
+      const notice = document.getElementById('madcoders_taxon_gallery_taxon_no_image_notice');
+      if (!selectElement) {
+        return;
+      }
+
+      const show = function (el) {
+        el.style.display = 'block';
+      };
+
+      const hide = function (el) {
+        el.style.display = 'none';
+      };
+
+      const getImageServiceUrl = function (code) {
+        return imageServiceUrlPattern.replace(/__taxonCode__/, code);
+      };
+
+      const displayImage = function (imagePath) {
+        console.log('displayImage');
+        image.src = imagePath;
+        hide(notice);
+        show(image);
+      };
+
+      const displayNoImageInfo = function () {
+        show(notice);
+        hide(image);
+      };
+
+      const onChange = function () {
+        const taxonCode = selectElement.value;
+
+        if (!taxonCode) {
+          displayNoImageInfo();
+        }
+
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+          if (request.readyState === 4) {
+            if (request.status === 200) {
+              const json = JSON.parse(request.response);
+              console.log(json)
+              if (json.image) {
+                displayImage(json.image);
+              } else {
+                displayNoImageInfo();
+              }
+            } else {
+              console.error('Image cannot be fetched');
+            }
+          }
+        }
+
+        request.open('GET', getImageServiceUrl(taxonCode));
+        request.send();
+      }
+
+      const init = function() {
+        selectElement.addEventListener('change', onChange);
+
+        hide(notice);
+        hide(image);
+        onChange();
+      }
+
+      init();
+    })();
+</script>
+
+
+<script>
+    {# set_default_code #}
+    (function () {
+      const selectElement = document.getElementById('{{ form.menuTaxon.vars.id }}');
+      const codeField = document.getElementById('{{ form.code.vars.id }}');
+      let canBePrePopulated = false;
+
+      if (!selectElement || !codeField) {
+        return;
+      }
+
+      const onChange = function () {
+        if (!canBePrePopulated) {
+          return;
+        }
+
+        const taxonCode = selectElement.value;
+        if (!taxonCode) {
+          return;
+        }
+
+        codeField.value = selectElement.value;
+      }
+
+      const init = function() {
+        selectElement.addEventListener('change', onChange);
+
+        if (!codeField.value) {
+          canBePrePopulated = true;
+        }
+
+        codeField.addEventListener('keyup', function() {
+          if (codeField.value) {
+            canBePrePopulated = false;
+          }
+        });
+
+        onChange();
+      }
+
+      init();
+    })();
+</script>

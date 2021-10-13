@@ -1,0 +1,16 @@
+# Sylius TaxonGallery Plugin
+#
+# @copyright MADCODERS Team (www.madcoders.co)
+# @licence For the full copyright and license information, please view the LICENSE
+#
+# Architects of this package:
+# @author Leonid Moshko <l.moshko@madcoders.pl>
+# @author Piotr Lewandowski <p.lewandowski@madcoders.pl>
+
+madcoders_taxon_gallery:
+    validator:
+        not_blank: 'Field cannot be empty'
+        slug:
+            not_blank: 'Field cannot be empty'
+        name:
+            not_blank: 'Field cannot be empty'

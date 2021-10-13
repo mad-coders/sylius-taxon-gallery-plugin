@@ -1,0 +1,13 @@
+{% if taxonGalleryItem.imageSource == 'custom' and taxonGalleryItem.imagePath is not null %}
+    {% set path = taxonGalleryItem.imagePath|imagine_filter('taxon_gallery_item_image') %}
+    <img src="{{ path }}" {{ sylius_test_html_attribute('taxon_gallery-main-image') }} alt="{{ taxonGalleryItem.menuTaxon.name }}" class="ui bordered image" />
+{% elseif taxonGalleryItem.imageSource == 'taxon' and taxon.images|length > 0 %}
+    {% set path = taxon.images.first.path|imagine_filter('taxon_small') %}
+    <img src="{{ path }}" {{ sylius_test_html_attribute('taxon_gallery-main-image') }} alt="{{ taxonGalleryItem.menuTaxon.name }}" class="ui bordered image" />
+{% else %}
+    <div class="image">
+        <div class="ui placeholder">
+            <div class="square image"></div>
+        </div>
+    </div>
+{% endif %}

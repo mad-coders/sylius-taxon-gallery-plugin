@@ -1,0 +1,45 @@
+# Sylius TaxonGallery Plugin
+#
+# @copyright MADCODERS Team (www.madcoders.co)
+# @licence For the full copyright and license information, please view the LICENSE
+#
+# Architects of this package:
+# @author Leonid Moshko <l.moshko@madcoders.pl>
+# @author Piotr Lewandowski <p.lewandowski@madcoders.pl>
+
+
+imports:
+  - { resource: "@MadcodersSyliusTaxonGalleryPlugin/Resources/config/grids.yaml" }
+
+knp_gaufrette:
+    adapters:
+        taxon_gallery_item_image:
+            local:
+                directory: "%sylius_core.public_dir%/media/taxon_gallery_item_image"
+                create: true
+    filesystems:
+        taxon_gallery_item_image:
+            adapter: taxon_gallery_item_image
+
+liip_imagine:
+    loaders:
+        taxon_gallery_item_image:
+            filesystem:
+                data_root: "%sylius_core.public_dir%/media/taxon_gallery_item_image"
+
+    filter_sets:
+        taxon_gallery_item_image:
+            data_loader: taxon_gallery_item_image
+            filters:
+                thumbnail: { size: [260, 260], mode: outbound }
+        taxon_small:
+            filters:
+                thumbnail: { size: [ 260, 260 ], mode: outbound }
+
+sylius_ui:
+    events:
+        sylius.shop.homepage:
+            blocks:
+                taxon_gallery_classic_show_all:
+                    template: "@MadcodersSyliusTaxonGalleryPlugin/Shop/TaxonGallery/classic_view.html.twig"
+                    priority: 55

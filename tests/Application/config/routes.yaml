@@ -1,0 +1,2 @@
+madcoders_sylius_taxon_gallery_plugin:
+    resource: "@MadcodersSyliusTaxonGalleryPlugin/Resources/config/routing.yaml"

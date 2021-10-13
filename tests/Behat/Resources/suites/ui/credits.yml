@@ -1,0 +1,20 @@
+#
+# This file is part of package:
+# Sylius Taxon Gallery Plugin
+#
+# @copyright MADCODERS Team (www.madcoders.co)
+# @licence For the full copyright and license information, please view the LICENSE
+#
+# Architects of this package:
+# @author Leonid Moshko <l.moshko@madcoders.pl>
+# @author Piotr Lewandowski <p.lewandowski@madcoders.pl>
+#
+
+default:
+    suites:
+        madcoders_credits:
+            contexts:
+                - madcoders_sylius_taxon_gallery.context.ui.shop.credits
+
+            filters:
+               tags: "@madcoders_credits"

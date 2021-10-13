@@ -1,0 +1,40 @@
+#
+# This file is part of package:
+# Sylius Taxon Gallery Plugin
+#
+# @copyright MADCODERS Team (www.madcoders.co)
+# @licence For the full copyright and license information, please view the LICENSE
+#
+# Architects of this package:
+# @author Leonid Moshko <l.moshko@madcoders.pl>
+# @author Piotr Lewandowski <p.lewandowski@madcoders.pl>
+#
+
+default:
+    suites:
+        madcoders_taxon_gallery_managing_taxon_gallery_item:
+            contexts:
+                # hook
+                - sylius.behat.context.hook.doctrine_orm
+
+                # setup
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.locale
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.taxonomy
+                - madcoders.sylius_taxon_gallery_plugin.behat.context.setup.taxon_gallery.taxon_gallery_item_context
+
+                # transformers
+                - sylius.behat.context.transform.channel
+                - sylius.behat.context.transform.country
+                - sylius.behat.context.transform.locale
+                - sylius.behat.context.transform.taxon
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.lexical
+
+                # ui
+                - sylius.behat.context.ui.admin.notification
+                - madcoders.sylius_taxon_gallery_plugin.behat.context.ui.admin.taxon_gallery.taxon_gallery_item_context
+
+            filters:
+                tags: "@managing_taxon_gallery_item && @ui"

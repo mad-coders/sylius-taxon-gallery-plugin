@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+This file is part of package:
+Sylius Taxon Gallery Plugin
+
+@copyright MADCODERS Team (www.madcoders.co)
+@licence For the full copyright and license information, please view the LICENSE
+
+Architects of this package:
+@author Leonid Moshko <l.moshko@madcoders.pl>
+@author Piotr Lewandowski <p.lewandowski@madcoders.pl>
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+           http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+
+    <services>
+
+        <service id="mmadcoders.sylius_taxon_gallery_plugin.twig.all_taxon_gallery_items_view"
+                 class="Madcoders\SyliusTaxonGalleryPlugin\Twig\AllTaxonGalleryItemsViewExtension">
+            <argument type="service" id="madcoders_taxon_gallery.repository.taxon_gallery_item" />
+            <argument type="service" id="twig" />
+            <tag name="twig.extension"/>
+        </service>
+
+    </services>
+</container>

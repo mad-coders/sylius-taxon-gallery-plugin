@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+Sylius TaxonGallery Plugin
+
+@copyright MADCODERS Team (www.madcoders.co)
+@licence For the full copyright and license information, please view the LICENSE
+
+Architects of this package:
+@author Leonid Moshko <l.moshko@madcoders.pl>
+@author Piotr Lewandowski <p.lewandowski@madcoders.pl>
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/**/*.xml" />
+    </imports>
+
+    <services>
+
+        <!-- Menu Listener -->
+        <service id="madcoders.sylius_taxon_gallery_plugin.ui.menu.admin_menu_listener"
+                 class="Madcoders\SyliusTaxonGalleryPlugin\Ui\Menu\AdminMenuListener">
+            <tag name="kernel.event_listener" event="sylius.menu.admin.main" method="addAdminMenuItems"/>
+        </service>
+
+        <!-- Taxon Gallery Item Icon Uploader -->
+        <service id="madcoders.sylius_taxon_gallery_plugin.uploader.image_uploader"
+                 class="Madcoders\SyliusTaxonGalleryPlugin\Uploader\ImageUploader">
+            <argument type="service">
+                <service class="Gaufrette\Filesystem">
+                    <argument>taxon_gallery_item_image</argument>
+                    <factory service="knp_gaufrette.filesystem_map" method="get" />
+                </service>
+            </argument>
+            <argument type="service" id="Madcoders\SyliusTaxonGalleryPlugin\Generator\ImagePathGeneratorInterface" />
+        </service>
+
+        <service id="Madcoders\SyliusTaxonGalleryPlugin\Uploader\ImageUploaderInterface"
+                 alias="madcoders.sylius_taxon_gallery_plugin.uploader.image_uploader" />
+
+        <service
+                id="Madcoders\SyliusTaxonGalleryPlugin\Generator\ImagePathGeneratorInterface"
+                class="Madcoders\SyliusTaxonGalleryPlugin\Generator\ImagePathGenerator" />
+
+        <!-- Images Upload Listener Listener -->
+        <service id="madcoders.sylius_care_instructions_plugin.listener.taxon_gallery_item_image_upload_listener"
+                 class="Madcoders\SyliusTaxonGalleryPlugin\EventListener\TaxonGalleryItemImageUploadListener">
+            <argument type="service" id="madcoders.sylius_taxon_gallery_plugin.uploader.image_uploader" />
+            <tag name="kernel.event_listener" event="madcoders_taxon_gallery.taxon_gallery_item.pre_create" method="uploadImage" />
+            <tag name="kernel.event_listener" event="madcoders_taxon_gallery.taxon_gallery_item.pre_update" method="uploadImage" />
+        </service>
+
+    </services>
+</container>

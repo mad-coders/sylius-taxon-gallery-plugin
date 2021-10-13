@@ -1,0 +1,11 @@
+# Sylius TaxonGallery Plugin
+#
+# @copyright MADCODERS Team (www.madcoders.co)
+# @licence For the full copyright and license information, please view the LICENSE
+#
+# Architects of this package:
+# @author Leonid Moshko <l.moshko@madcoders.pl>
+# @author Piotr Lewandowski <p.lewandowski@madcoders.pl>
+
+imports:
+  - { resource: "@MadcodersSyliusTaxonGalleryPlugin/Resources/config/grids/sylius_taxon_gallery_plugin_admin_taxon_gallery_grid.yml" }

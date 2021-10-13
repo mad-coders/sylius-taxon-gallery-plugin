@@ -1,0 +1,54 @@
+# Sylius TaxonGallery Plugin
+#
+# @copyright MADCODERS Team (www.madcoders.co)
+# @licence For the full copyright and license information, please view the LICENSE
+#
+# Architects of this package:
+# @author Leonid Moshko <l.moshko@madcoders.pl>
+# @author Piotr Lewandowski <p.lewandowski@madcoders.pl>
+
+
+sylius_grid:
+    grids:
+        sylius_taxon_gallery_plugin_admin_taxon_gallery:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: Madcoders\SyliusTaxonGalleryPlugin\Entity\TaxonGalleryItem
+            sorting:
+                date: desc
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                    sortable: ~
+                menuTaxon:
+                    type: twig
+                    label: sylius.ui.main_taxon
+                    options:
+                        template: "@SyliusAdmin/Product/Grid/Field/mainTaxon.html.twig"
+                position:
+                    type: string
+                    label: sylius.ui.position
+                    sortable: ~
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                date:
+                    type: datetime
+                    label: sylius.ui.date
+                    path: createdAt
+                    sortable: createdAt
+                    options:
+                        format: d-m-Y H:i:s
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

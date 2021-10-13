@@ -1,0 +1,34 @@
+# Sylius TaxonGallery Plugin
+#
+# @copyright MADCODERS Team (www.madcoders.co)
+# @licence For the full copyright and license information, please view the LICENSE
+#
+# Architects of this package:
+# @author Leonid Moshko <l.moshko@madcoders.pl>
+# @author Piotr Lewandowski <p.lewandowski@madcoders.pl>
+
+madcoders_taxon_gallery:
+    ui:
+        taxon_gallery: 'Taxon gallery'
+        taxon_gallery_items: 'Taxon gallery items list'
+        show_taxon_gallery_item: 'Show taxon gallery item'
+        new_taxon_gallery_item: 'Created new taxon gallery item'
+        edit_taxon_gallery_item: 'Edit taxon gallery item'
+    admin:
+        taxon_gallery_item_show_or_edit: 'Show, add or edit taxon gallery item'
+        taxon_gallery_item:
+            info_area_text: 'File to upload'
+            form:
+                enabled: 'Enabled'
+                position: 'Position'
+                name: 'Name'
+                description: 'Description'
+                download: 'Download'
+                image_block_upload: 'Upload image'
+                image_block_from_taxon: 'Image from taxon'
+                image_preview: 'Image preview'
+                image_source: 'Image source'
+                no_taxon_image: 'There is not an image associated with selected taxon'
+                image:
+                    use_from_taxon: 'take existing image from taxon'
+                    upload_image: 'upload own image right now'

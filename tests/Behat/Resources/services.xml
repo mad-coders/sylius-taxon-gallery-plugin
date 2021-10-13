@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd" >
+
+    <services>
+
+        <defaults public="true" />
+
+        <!-- Setup Context  -->
+        <service id="madcoders.sylius_taxon_gallery_plugin.behat.context.setup.taxon_gallery.taxon_gallery_item_context"
+                 class="Tests\Madcoders\SyliusTaxonGalleryPlugin\Behat\Context\Setup\TaxonGallery\TaxonGalleryItemContext">
+            <argument type="service" id="madcoders_taxon_gallery.repository.taxon_gallery_item" />
+
+        </service>
+
+        <!-- UI Context  -->
+        <service id="madcoders_sylius_taxon_gallery.context.ui.shop.credits"
+                 class="Tests\Madcoders\SyliusTaxonGalleryPlugin\Behat\Context\Ui\Shop\CreditsContext">
+            <argument type="service" id="madcoders_sylius_taxon_gallery.page.shop.credits" />
+        </service>
+
+        <service id="madcoders.sylius_taxon_gallery_plugin.behat.context.ui.admin.taxon_gallery.taxon_gallery_item_context"
+                 class="Tests\Madcoders\SyliusTaxonGalleryPlugin\Behat\Context\Ui\Admin\TaxonGallery\TaxonGalleryItemContext">
+            <argument type="service" id="madcoders.sylius_taxon_gallery_plugin.behat.page.admin.taxon_gallery.item.index_page" />
+            <argument type="service" id="madcoders.sylius_taxon_gallery_plugin.behat.page.admin.taxon_gallery.item.create_page" />
+            <argument type="service" id="madcoders.sylius_taxon_gallery_plugin.behat.page.admin.taxon_gallery.item.update_page" />
+            <argument type="service" id="madcoders_taxon_gallery.repository.taxon_gallery_item" />
+            <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
+
+        <!--  Pages  -->
+        <service id="madcoders_sylius_taxon_gallery.page.shop.credits"
+                 class="Tests\Madcoders\SyliusTaxonGalleryPlugin\Behat\Page\Shop\CreditsPage"
+                 parent="sylius.behat.symfony_page" public="false" />
+
+        <service id="madcoders.sylius_taxon_gallery_plugin.behat.page.admin.taxon_gallery.item.index_page"
+                 class="Tests\Madcoders\SyliusTaxonGalleryPlugin\Behat\Page\Admin\TaxonGallery\Item\IndexPage"
+                 parent="sylius.behat.page.admin.crud.index" public="false" >
+            <argument type="string">madcoders_taxon_gallery_admin_taxon_gallery_item_index</argument>
+        </service>
+
+        <service id="madcoders.sylius_taxon_gallery_plugin.behat.page.admin.taxon_gallery.item.create_page"
+                 class="Tests\Madcoders\SyliusTaxonGalleryPlugin\Behat\Page\Admin\TaxonGallery\Item\CreatePage"
+                 parent="sylius.behat.page.admin.crud.create" public="false">
+            <argument type="string">madcoders_taxon_gallery_admin_taxon_gallery_item_create</argument>
+        </service>
+
+        <service id="madcoders.sylius_taxon_gallery_plugin.behat.page.admin.taxon_gallery.item.update_page"
+                 class="Tests\Madcoders\SyliusTaxonGalleryPlugin\Behat\Page\Admin\TaxonGallery\Item\UpdatePage"
+                 parent="sylius.behat.page.admin.crud.create" public="false">
+            <argument type="string">madcoders_taxon_gallery_admin_taxon_gallery_item_update</argument>
+        </service>
+
+    </services>
+</container>
