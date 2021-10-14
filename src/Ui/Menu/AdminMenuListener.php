@@ -29,7 +29,7 @@ class AdminMenuListener
 
         $newMadcodersCareInstructionSubmenu
             ->addChild('madcoders-taxon-gallery-list', ['route' => 'madcoders_taxon_gallery_admin_taxon_gallery_item_index'])
-            ->setLabel('Taxon gallery')
+            ->setLabel('Taxon Gallery Items')
             ->setLabelAttribute('icon', 'file image outline')
         ;
     }
