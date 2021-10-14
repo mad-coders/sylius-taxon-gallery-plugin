@@ -119,7 +119,8 @@
       };
 
       const onChange = function() {
-        if (selectElement.value === '{{ constant(namespace ~ '\\TaxonGalleryItemInterface::IMAGE_SOURCE_TAXON') }}') {
+        console.log(selectElement.value, '{{ constant(namespace ~ '\\TaxonGalleryItemInterface::IMAGE_SOURCE_CUSTOM') }}');
+        if (selectElement.value === '{{ constant(namespace ~ '\\TaxonGalleryItemInterface::IMAGE_SOURCE_CUSTOM') }}') {
           show(imageBlockUploaded);
           hide(imageBlockTaxon);
         } else {
