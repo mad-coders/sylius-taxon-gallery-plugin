@@ -119,7 +119,7 @@
       };
 
       const onChange = function() {
-        if (selectElement.value === '{{ constant(namespace ~ '\\TaxonGalleryItemInterface::IMAGE_SOURCE_TAXON') }}') {
+        if (selectElement.value === '{{ constant(namespace ~ '\\TaxonGalleryItemInterface::IMAGE_SOURCE_CUSTOM') }}') {
           show(imageBlockUploaded);
           hide(imageBlockTaxon);
         } else {
@@ -164,7 +164,6 @@
       };
 
       const displayImage = function (imagePath) {
-        console.log('displayImage');
         image.src = imagePath;
         hide(notice);
         show(image);
@@ -187,7 +186,6 @@
           if (request.readyState === 4) {
             if (request.status === 200) {
               const json = JSON.parse(request.response);
-              console.log(json)
               if (json.image) {
                 displayImage(json.image);
               } else {
