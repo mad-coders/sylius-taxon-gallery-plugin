@@ -1,11 +1,7 @@
 <div class="ui grid">
-    <div class="sixteen wide tablet sixteen wide computer column">
-        <div class="ui four cards">
-            {% for taxonGalleryItem in taxonGalleryItems %}
-                {% include '@MadcodersSyliusTaxonGalleryPlugin/Shop/TaxonGallery/View/Classic/Item/_box.html.twig' %}
-            {% endfor %}
-        </div>
-    </div>
+    {% for taxonGalleryItem in taxonGalleryItems %}
+        {% include '@MadcodersSyliusTaxonGalleryPlugin/Shop/TaxonGallery/View/Classic/Item/_box.html.twig' %}
+    {% endfor %}
 </div>
-<div class="ui hidden divider"></div>
 
+<div class="ui hidden divider"></div>

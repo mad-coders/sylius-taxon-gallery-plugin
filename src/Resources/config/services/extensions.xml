@@ -20,7 +20,7 @@ Architects of this package:
 
     <services>
 
-        <service id="mmadcoders.sylius_taxon_gallery_plugin.twig.all_taxon_gallery_items_view"
+        <service id="madcoders.sylius_taxon_gallery_plugin.twig.all_taxon_gallery_items_view"
                  class="Madcoders\SyliusTaxonGalleryPlugin\Twig\AllTaxonGalleryItemsViewExtension">
             <argument type="service" id="madcoders_taxon_gallery.repository.taxon_gallery_item" />
             <argument type="service" id="twig" />
