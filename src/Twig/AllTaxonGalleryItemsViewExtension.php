@@ -57,7 +57,7 @@ class AllTaxonGalleryItemsViewExtension extends AbstractExtension
             $template = '@MadcodersSyliusTaxonGalleryPlugin/Shop/TaxonGallery/View/Classic/show_all.html.twig';
         }
 
-        $taxonGalleryItems = $this->taxonGalleryItemsRepository->findBy(['enabled' => true]);
+        $taxonGalleryItems = $this->taxonGalleryItemsRepository->findBy(['enabled' => true], [ 'position' => 'asc' ]);
 
         return $this->templatingEngine->render(
             $template, ['taxonGalleryItems' => $taxonGalleryItems]

@@ -1,18 +1,21 @@
 {% set taxon = taxonGalleryItem.menuTaxon %}
-
-<div class="ui fluid card" {{ sylius_test_html_attribute('taxon-gallery-box') }}>
-    <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}" class="blurring dimmable image">
-        <div class="ui dimmer">
-            <div class="content">
-                <div class="center">
-                    <div class="ui inverted button">{{ 'sylius.ui.view_more'|trans }}</div>
+<div class="eight wide tablet four wide computer column">
+    <div class="ui cards">
+        <div class="ui fluid card" {{ sylius_test_html_attribute('taxon-gallery-box') }}>
+            <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}" class="blurring dimmable image">
+                <div class="ui dimmer">
+                    <div class="content">
+                        <div class="center">
+                            <div class="ui inverted button">{{ 'sylius.ui.view_more'|trans }}</div>
+                        </div>
+                    </div>
                 </div>
+                {% include '@MadcodersSyliusTaxonGalleryPlugin/Shop/TaxonGallery/View/Classic/Item/_mainImage.html.twig' %}
+            </a>
+            <div class="content" {{ sylius_test_html_attribute('taxon-gallery-content') }}>
+                <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}"
+                   class="header sylius-product-name" {{ sylius_test_html_attribute('taxon-name', taxon.name) }}>{{ taxon.name }}</a>
             </div>
         </div>
-        {% include '@MadcodersSyliusTaxonGalleryPlugin/Shop/TaxonGallery/View/Classic/Item/_mainImage.html.twig' %}
-    </a>
-    <div class="content" {{ sylius_test_html_attribute('taxon-gallery-content') }}>
-        <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}"
-           class="header sylius-product-name" {{ sylius_test_html_attribute('taxon-name', taxon.name) }}>{{ taxon.name }}</a>
     </div>
 </div>

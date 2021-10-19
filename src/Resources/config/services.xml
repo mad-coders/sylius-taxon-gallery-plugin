@@ -44,7 +44,7 @@ Architects of this package:
                 class="Madcoders\SyliusTaxonGalleryPlugin\Generator\ImagePathGenerator" />
 
         <!-- Images Upload Listener Listener -->
-        <service id="madcoders.sylius_care_instructions_plugin.listener.taxon_gallery_item_image_upload_listener"
+        <service id="madcoders.sylius_taxon_gallery_plugin.event_listener.taxon_gallery_item_image_upload_listener"
                  class="Madcoders\SyliusTaxonGalleryPlugin\EventListener\TaxonGalleryItemImageUploadListener">
             <argument type="service" id="madcoders.sylius_taxon_gallery_plugin.uploader.image_uploader" />
             <tag name="kernel.event_listener" event="madcoders_taxon_gallery.taxon_gallery_item.pre_create" method="uploadImage" />
