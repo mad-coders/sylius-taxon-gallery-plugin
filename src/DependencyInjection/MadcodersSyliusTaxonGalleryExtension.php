@@ -60,6 +60,6 @@ final class MadcodersSyliusTaxonGalleryExtension extends AbstractResourceExtensi
 
     protected function getNamespacesOfMigrationsExecutedBefore(): array
     {
-        return [];
+        return ['Sylius\Bundle\CoreBundle\Migrations'];
     }
 }
