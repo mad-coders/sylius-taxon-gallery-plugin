@@ -5,7 +5,7 @@
          colors="true"
          bootstrap="tests/Application/config/bootstrap.php">
     <testsuites>
-        <testsuite name="MadcodersSyliusTaxonGalleryPlugin Test Suite">
+        <testsuite name="AcmeSyliusExamplePlugin Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
@@ -18,5 +18,10 @@
 
         <env name="APP_ENV" value="test"/>
         <env name="SHELL_VERBOSITY" value="-1" />
+
+        <!-- ###+ symfony/framework-bundle ### -->
+        <env name="APP_ENV" value="dev"/>
+        <env name="APP_SECRET" value="0535f040bc5e9edd4fe4e451fffef9fd"/>
+        <!-- ###- symfony/framework-bundle ### -->
     </php>
 </phpunit>

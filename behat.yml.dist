@@ -1,6 +1,6 @@
 imports:
-    - tests/Behat/Resources/suites.yml
     - vendor/sylius/sylius/src/Sylius/Behat/Resources/config/suites.yml
+    - tests/Behat/Resources/suites.yml
 
 default:
     extensions:
@@ -12,8 +12,8 @@ default:
             screenshot: true
 
         Behat\MinkExtension:
-            files_path: "%paths.base%/src/Resources/fixtures/"
-            base_url: "https://127.0.0.1:8000/"
+            files_path: "%paths.base%/vendor/sylius/sylius/src/Sylius/Behat/Resources/fixtures/"
+            base_url: "https://127.0.0.1:8080/"
             default_session: symfony
             javascript_session: chrome_headless
             sessions:
@@ -46,7 +46,7 @@ default:
         FriendsOfBehat\SymfonyExtension:
             bootstrap: tests/Application/config/bootstrap.php
             kernel:
-                class: Tests\Madcoders\SyliusTaxonGalleryPlugin\Application\Kernel
+                class: Tests\Acme\SyliusExamplePlugin\Application\Kernel
 
         FriendsOfBehat\VariadicExtension: ~
 
