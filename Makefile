@@ -14,7 +14,7 @@ behat-js:
 	APP_ENV=test vendor/bin/behat --colors --strict --no-interaction -vvv -f progress
 
 install:
-	composer install --no-interaction --no-scripts --no-plugins
+	composer install --no-interaction --no-plugins
 
 backend:
 	tests/Application/bin/console sylius:install --no-interaction
